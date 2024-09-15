@@ -35,7 +35,7 @@
             "url": "Quicksync",
             "image": "Quicksync.png",
             "bio": "Quicksync is the master of synchronization and caching, able to move data with incredible speed and ensure that the most frequently used data is always readily accessible. His ability to synchronize systems in real-time helps reduce latency and improve performance.",
-            "skill": "Caching, Synchronization, Load Balancing",
+            "skill": "Caching, Data Synchronization",
             "strengths": "<ul><li><strong>Real-Time Data Synchronization:</strong><br/> Quicksync can ensure that all data across multiple systems remains synchronized in real-time, preventing discrepancies and maintaining system consistency.</li><li><strong>Efficient Caching:</strong><br/> Quicksync excels at caching frequently accessed data, reducing latency, and ensuring fast response times for users. His caching mechanisms reduce the need to query databases repeatedly, improving system performance.</li></ul>",
             "weakness": "<ul><li><strong>Cache Invalidation Issues:</strong><br/> While Quicksync is excellent at caching, the invalidation of outdated cache data can sometimes cause issues, leading to inconsistencies between systems.</li><li><strong>High-Speed Data Strain:</strong><br/> The faster Quicksync works, the more strain he places on systems, which can lead to bottlenecks in high-speed data synchronization processes.</li></ul>"
         },
@@ -44,9 +44,9 @@
             "name": "Threadripper",
             "url": "Threadripper",
             "image": "Threadripper.png",
-            "bio": "Threadripper is a master of concurrency and parallel processing, able to split herself into multiple versions to handle complex, simultaneous tasks. She excels at managing distributed transactions and optimizing system performance by breaking down tasks into manageable threads.",
+            "bio": "Threadripper is a master of concurrency and parallel processing, able to split herself into multiple versions to handle complex, simultaneous tasks. She excels at managing distributed transactions and optimizing system performance by breaking down tasks apart.",
             "skill": "Concurrency, Distributed Transactions, Parallel Processing",
-            "strengths": "<ul><li><strong>Concurrency Management:</strong><br/> Threadripper can handle multiple tasks at once, splitting them into parallel threads that work efficiently and without conflict. This allows for faster execution of complex operations.</li><li><strong>Distributed Transactions:</strong><br/> She ensures that distributed transactions are coordinated and consistent, preventing conflicts and failures even in large, complex systems.</li><li><strong>Parallel Processing:</strong><br/> Threadripper excels at breaking down tasks into smaller threads, allowing systems to process them in parallel and significantly boosting performance and throughput.</li></ul>",
+            "strengths": "<ul><li><strong>Concurrency Management:</strong><br/> Threadripper can handle multiple tasks at once, splitting them into parallel threads that work efficiently and without conflict. This allows for faster execution of complex operations.</li><li><strong>Distributed Transactions & Async Messaging:</strong><br/> Threadripper ensures that distributed transactions are coordinated and consistent, preventing conflicts and failures even in large, complex systems. She excels at managing async messaging, orchestrating queues, pub/sub, and streams with precision. Whether splitting tasks across multiple threads or handling asynchronous communication, she guarantees smooth data flow and system stability, even when components operate independently.</li><li><strong>Parallel Processing:</strong><br/> Threadripper excels at breaking down tasks into smaller threads, allowing systems to process them in parallel and significantly boosting performance and throughput.</li></ul>",
             "weakness": "<ul><li><strong>Thread Contention:</strong><br/> Threadripper's reliance on splitting tasks into threads can lead to contention when too many threads compete for the same resources, causing performance bottlenecks.</li><li><strong>Synchronization Overhead:</strong><br/> Managing and synchronizing multiple threads can introduce overhead, leading to delays and potential deadlocks in systems that aren’t optimized for concurrency.</li></ul>"
         },
         {
@@ -75,7 +75,7 @@
             "url": "Petabyte",
             "image": "Petabyte.png",
             "bio": "Petabyte is a master of data overload, capable of overwhelming systems by generating vast amounts of data. As the ultimate foe of scalability, he pushes systems to their breaking point, forcing them to deal with exponential data growth that no infrastructure can handle.",
-            "skill": "Data Overload, Scalability Strain",
+            "skill": "Big Data Overload, Scalability Strain",
             "strengths": "<ul><li><strong>Exponential Data Growth:</strong><br/> Petabyte can exponentially increase data volumes in a matter of seconds, turning kilobytes into petabytes, overwhelming even the most scalable systems.</li><li><strong>Resource Drain:</strong><br/> By rapidly increasing data loads, Petabyte can deplete system resources, leaving systems struggling to keep up and leading to performance degradation or failure.</li></ul>",
             "weakness": "<ul><li><strong>Capacity Planning:</strong><br/> Systems that are well-prepared with robust capacity planning and scalability measures in place can mitigate the effects of Petabyte's data overload.</li><li><strong>Data Pruning:</strong><br/> Petabyte's strength diminishes in systems where unused or unnecessary data is regularly pruned or archived, limiting the impact of his data growth attacks.</li></ul>"
         },
@@ -85,7 +85,7 @@
             "url": "Count",
             "image": "Count.png",
             "bio": "The Count is the genius mastermind behind database design, known for his ability to manipulate and control vast amounts of data. He excels in complex database architectures and is a formidable foe when it comes to selecting the most complicated and resource-intensive database types. His blue face and sinister presence, accompanied by his bats, make him an unpredictable and dangerous villain.",
-            "skill": "Database Design, Data Manipulation",
+            "skill": "Complex Data, Algorithms & Data Science",
             "strengths": "<ul><li><strong>Complex Data Architectures:</strong><br/> The Count can create and manage the most intricate and highly scalable database architectures, pushing the limits of conventional database design.</li><li><strong>Database Type Selection:</strong><br/> His expertise in selecting database types based on specific needs makes him a master of databases, whether it's relational, NoSQL, or distributed databases.</li></ul>",
             "weakness": "<ul><li><strong>Simplicity:</strong><br/> Systems that rely on simple, well-structured databases are less vulnerable to The Count's convoluted and over-complicated database designs.</li><li><strong>Automation and Optimization:</strong><br/> Automated database optimization tools and practices reduce the negative impact of The Count’s over-engineered databases.</li></ul>"
         },
@@ -115,7 +115,7 @@
             "url": "Chaosbringer",
             "image": "Chaosbringer.png",
             "bio": "Chaosbringer is the embodiment of unpredictability in systems. He thrives on creating chaos by introducing failures, bottlenecks, and instability, pushing systems to their breaking point. He excels at finding and amplifying weaknesses in even the most resilient architectures, causing widespread disruption.",
-            "skill": "Chaos Engineering, Bottlenecks, System Failures",
+            "skill": "Chaos Engineering, System Failures",
             "strengths": "<ul><li><strong>Failure Injection:</strong><br/> Chaosbringer can randomly introduce failures into systems to test their resilience, often causing instability and outages in areas that seem stable under normal conditions.</li><li><strong>Exploiting Bottlenecks:</strong><br/> He finds the weakest points in a system and amplifies them, causing bottlenecks that slow down or halt performance completely.</li></ul>",
             "weakness": "<ul><li><strong>Resilient Architecture:</strong><br/> Architectures designed with fault tolerance, redundancy, and recovery mechanisms can withstand Chaosbringer’s attempts to create system-wide failures.</li><li><strong>Chaos Engineering Preparedness:</strong><br/> Systems that have undergone chaos engineering simulations are better equipped to handle the disruptions caused by Chaosbringer.</li></ul>"
         },
@@ -165,7 +165,7 @@
             "url": "Disrupt",
             "image": "Disrupt.png",
             "bio": "Dr. Disrupt is a chaotic force in the digital world, thriving on instability and change. With the power to disrupt systems, processes, and workflows, she can cause critical failures at the worst possible moments. Her ability to induce unpredictability makes her a formidable villain in any well-structured system, challenging its resilience and flexibility.",
-            "skill": "System Disruption, Chaos Induction, Process Sabotage",
+            "skill": "Network Failures, System Disruption, Process Sabotage",
             "strengths": "<ul><li><strong>Instantaneous Disruption:</strong><br/> Dr. Disrupt can throw systems into chaos with a single action, causing unpredictable failures, interruptions, and breakdowns in key workflows.</li><li><strong>Sabotaging Stability:</strong><br/> She specializes in targeting stable systems and processes, inducing sudden instability that is hard to predict and even harder to manage.</li></ul>",
             "weakness": "<ul><li><strong>Resilient Design:</strong><br/> Systems designed with flexibility and built-in redundancy can withstand Dr. Disrupt's chaos, making her disruptions less effective.</li><li><strong>Automated Recovery Systems:</strong><br/> Systems with strong recovery protocols and automated failover can neutralize the effects of her induced disruptions.</li></ul>"
         }
