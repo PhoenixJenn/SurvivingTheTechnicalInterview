@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/stti.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/bootstrap-icons/font/bootstrap-icons.scss" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Include AngularJS core -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<!-- Include AngularJS sanitize module -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+
+
+
+</head>
+<body>
+    <div ng-app="SurvivingTheTechnicalInterview" ng-controller="heroCtrl" ng-init="">
+    <div ng-include="'nav.html'"></div>
+   
+<main>
+       
+<!-- <div data-v-32768 class="container" style="margin-top: 25px">
+    <div data-v-32768 class="side-lines side-lines-left"></div>
+    <div data-v-32768 class="side-lines side-lines-right"></div>
+    <div data-v-32768 class="side-lines side-lines-top"></div>
+    <div class="row" style="padding-left: 30px;padding-right:20px;">
+        <div class="row-inner" ng-repeat="c in CHARACTERS | filter: { type: 'Hero' }">
+            
+            <div ng-include="'profile.html'"></div>
+        </div>
+    </div>
+</div> -->
+
+
+<div data-v-32768 class="container" style="margin-top: 25px">
+    <div data-v-32768 class="side-lines side-lines-left"></div>
+    <div data-v-32768 class="side-lines side-lines-right"></div>
+    <div data-v-32768 class="side-lines side-lines-top"></div>
+    <div class="row" style="padding-left: 30px;padding-right:20px;">
+        <!-- Row for displaying filtered character based on the query string -->
+        <div class="row-inner" ng-repeat="c in filteredCharacter">
+            <div ng-include="'profile.html'"></div>
+        </div>
+
+        <!-- If no query string is provided, display all characters of type Hero -->
+        <div class="row-inner" ng-if="!filteredCharacter" ng-repeat="c in CHARACTERS | filter: { type: 'Hero' }">
+            <div ng-include="'profile.html'"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</main>
+</div>
+
+
+<script>
+
+var app = angular.module('SurvivingTheTechnicalInterview', ['ngSanitize']);
+// var app = angular.module('SurvivingTheTechnicalInterview', []);
+
+
+
+app.controller('heroCtrl', function($scope, $http) {
+    $scope.date = new Date();
+
+    // Fetch the external JSON file
+    $http.get('characters.json').then(function(response) {
+        $scope.CHARACTERS = response.data;
+        
+        // Use URLSearchParams to get the query string
+        var urlParams = new URLSearchParams(window.location.search);
+        var characterName = urlParams.get('name');
+        console.log(characterName); // log the value for troubleshooting
+        
+        // Filter based on query string
+        if (characterName) {
+            $scope.filteredCharacter = $scope.CHARACTERS.filter(function(character) {
+                console.log(character.url.toLowerCase()); // confirm filtering
+                return character.url.toLowerCase() === characterName.toLowerCase();
+            });
+            console.log($scope.filteredCharacter); // confirm filtering
+            
+        }
+    });
+});
+ 
+
+  
+</script>
+
+          </body>
+          </html>
+          <html>

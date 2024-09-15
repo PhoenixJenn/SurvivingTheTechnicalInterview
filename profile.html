@@ -1,0 +1,50 @@
+<div  class="row flex-lg-row align-items-center  g-5 py-5 " style="padding-bottom: 0px !important;">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="images/Heroes/{{c.image}}" alt="{{c.name}}" class="rounded-circle shadow-4-strong d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"> 
+        <img ng-src="{{ c.type === 'Hero' ? 'images/hero_logo.png' : 'images/villain_logo.png' }}" alt="{{c.type}} logo">
+         <!-- <img src="images/hero_logo.png"> -->
+         <!-- <b class="display-3" style="font-family:'Komika Axis'">HERO</b> -->
+         <br/>
+         {{c.name}}
+    
+    </h1>
+      <p class="lead rounded-left" style="background-color: black; color:white;padding: 10px">
+        {{c.skill}}
+    </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 ">Learn More</button>
+      
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+  <div>
+      <span class="display-6" style="font-family:KomikaAxis; ">Bio</span>
+      <br/>
+      <div class="rounded biobox">
+        <!-- {{c.bio}} -->
+        <p ng-bind-html="c.bio"></p>
+      </div>
+      
+  </div>
+  
+  <img src="images/powers.png" alt="powers"> <br/>
+  <div class="rounded biobox" >
+      <!-- {{c.powers}} -->
+      <p ng-bind-html="c.strengths"></p>
+
+  </div>
+  <img src="images/weaknesses.png" alt="powers">
+  <br/>
+  <div class="biobox">
+    <!-- {{c.weakness}} -->
+    <p ng-bind-html="c.weakness"></p>
+  </div>
+
+
+ 

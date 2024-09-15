@@ -1,0 +1,73 @@
+[
+    {
+        "alias": "System Design Overview",
+        "type":"active",
+        "url": "systemdesignoverview",
+        "image": "/images/infographics/SystemDesignInfoGraphic.png",
+        "shortdesc": "The system design interview is broken into four key steps: Clarify Requirements, High-Level Design, Low-Level Design, and Discussion. Each section provides a high-level overview of the critical concepts, helping you tackle technical challenges with confidence."
+
+    },
+    {
+        "alias": "Estimating Data",
+        "type":"active",
+        "url": "estimatingdata",
+        "image": "/images/infographics/EstimatingData.png",
+        "shortdesc": "Demystify data estimation by gaining a clear sense of relative orders of magnitude. From the amount of storage required to store a single character to social media site usage, you'll get a solid starting point for estimating large data sets."
+    },
+    {
+        "alias": "Back of The Envelope Math",
+        "type":"active",
+        "url": "envelopemath",
+        "image": "/images/infographics/BackOfEnvelopeMath.png",
+        "shortdesc": "Using YouTube as an example, estimate capacity requirements with back of the envelope math. Architecta guides you through estimating key metrics like daily active users, storage requirements and transactions per second."
+    },
+    {
+        "alias": "Protocols and APIs",
+        "type":"active",
+        "url": "protocolsandapis",
+        "image": "/images/infographics/ProtocolsAndAPIsGraphic.png",
+        "shortdesc": "Get a comprehensive overview of the essential APIs and internet protocols for system design. With these insights, you’ll be ready to choose the right communication methods for your application."
+    },
+    {
+        "alias": "Choosing a Database",
+        "type":"active",
+        "url": "choosingadatabase",
+        "image": "/images/infographics/ChoosingADatabaseInfoGraphic.png",
+        "shortdesc": "Choosing the right database requires a combination of understanding the use case and knowing if your data is structured, unstructured, or semi-structured data."
+    },
+    {
+        "alias": "Async Communication",
+        "type":"active",
+        "url": "async",
+        "image": "/images/infographics/MessagQueuesInfoGraphic_1024h.png",
+        "shortdesc": "Get a clear understanding of asynchronous messaging through Message Queues, Pub/Sub, and Streams so that you can hoose the right communication model for distributed systems."
+    },
+    {
+        "alias": "Load Balancing",
+        "type":"inactive",
+        "url": "",
+        "image": "",
+        "shortdesc": ""
+    },
+    {
+        "alias": "Caching",
+        "type":"inactive",
+        "url": "",
+        "image": "",
+        "shortdesc": ""
+    },
+    {
+        "alias": "TBD",
+        "type":"inactive",
+        "url": "",
+        "image": "",
+        "shortdesc": ""
+    },
+    {
+        "alias": "TBD",
+        "type":"inactive",
+        "url": "",
+        "image": "",
+        "shortdesc": ""
+    }
+]

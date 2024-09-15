@@ -14,33 +14,32 @@
 
 </head>
 <body>
-    <div ng-app="heroes" ng-controller="heroCtrl" ng-init="">
+    <div ng-app="villains" ng-controller="villainCtrl" ng-init="">
     <div ng-include="'nav.html'"></div>
     <main>
 
         <section class="py-5 text-center container">
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-              <h1 class="fw-light">HEROES</h1>
+              <h1 class="fw-light">Villains</h1>
               <p class="lead text-body-secondary">
-                Meet the heroes who bring system design concepts to life! 
-                Each character possesses unique powers, and together they conquer complex challenges.
+                Meet the villains who embody the toughest challenges when managing large-scale systems! 
+                Each villain brings chaos, inefficiency, and disruption to your systems, forcing you to overcome their destructive powers and keep your architectures strong.
             </p>
               <p>
-                <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+                <a href="#" class="btn btn-primary my-2">Main call to action</a>
+                <a href="#" class="btn btn-secondary my-2">Secondary action</a>
               </p>
             </div>
           </div>
         </section>
       
-
         <div class="album py-5 bg-body-tertiary">
           <div class="container">
       
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-              <div class="col" ng-repeat="c in CHARACTERS | filter: { type: 'Hero' }" >
+              <div class="col" ng-repeat="c in CHARACTERS | filter: { type: 'Villain' }" >
                 <div class="card shadow-sm">
                     <img src="images/Heroes/{{c.image}}" class="rounded-circle">
                   <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
@@ -74,23 +73,29 @@
 
 
       <script>
-        var app = angular.module('heroes', []);
+
+
+
+        var app = angular.module('villains', []);
       
-        app.controller('heroCtrl', function($scope, $http) {
+        app.controller('villainCtrl', function($scope, $http) {
       
             $scope.date = new Date();
 
             // Fetch the external characters.json file
           $http.get('characters.json').then(function(response) {
-              // Filter the characters to only include those with type 'Hero'
+              // Filter the characters to only include those with type 'Villain'
               $scope.CHARACTERS = response.data.filter(function(character) {
-                  return character.type === 'Hero';
+                return character.type.trim().toLowerCase() === 'villain';
               });
+              console.log("Filtered data:", $scope.CHARACTERS);  // Log filtered villains
           }, function(error) {
               console.error('Error loading characters.json:', error);
           });
         }
         );
+      
+       
         </script>
 </body>
 </html>
