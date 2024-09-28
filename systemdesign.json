@@ -50,16 +50,16 @@
     },
     {
         "alias": "Load Balancing",
-        "type":"inactive",
-        "url": "",
-        "image": "",
-        "thumbnail": "",
-        "shortdesc": ""
+        "type":"active",
+        "url": "loadbalancing",
+        "image": "/images/infographics/LoadBalancing_Infographic.png",
+        "thumbnail": "/images/infographics/LoadBalancing_Infographic.png",
+        "shortdesc": "Load Balancing is A key factor in scaling systems efficiently, improving performance, and ensuring fault tolerance. Whether it’s handling millions of concurrent connections with Network Load Balancers (NLBs) or managing application traffic with Application Load Balancers (ALBs), each approach has unique strengths that fit different scenarios."
     },
     {
         "alias": "Caching",
         "type":"inactive",
-        "url": "",
+        "url": "caching",
         "image": "",
         "thumbnail": "",
         "shortdesc": ""

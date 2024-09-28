@@ -8,6 +8,14 @@
     src: url('../fonts/KOMIKAX_.ttf');
  }
 
+ hr.colored {
+    
+    border: 2px solid #b22222;;
+    text-align: center !important;
+    opacity: 1;
+
+ }
+
 .comic-red, nav-link.active {
     background-color: #b22222;
     color: #ffffff;

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/stti.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/bootstrap-icons/font/bootstrap-icons.scss" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Include AngularJS core -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<!-- Include AngularJS sanitize module -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+
+
+
+</head>
+<body>
+    <div ng-app="topics" ng-controller="topicCtrl" ng-init="">
+    <div ng-include="'nav.html'"></div>
+   
+<main>
+
+   
+    
+    <section class="py-5 text-center container" style=" padding-bottom: 0x !important; border-bottom:0px !important">
+        <div class="row py-lg-5" style=" padding-bottom: 0x !important; border-bottom:0px !important">
+          <div class="col-lg-10 col-md-10 mx-auto">
+            <h1 class="fw-light">{{alias}}</h1>
+            <p class="lead text-body-secondary">
+                <div  >
+                    <div ng-if="filteredConcept.length > 0">
+                        <h1 class="title">{{filteredConcept[0].alias}}</h1>
+                      
+                      <p>{{filteredConcept[0].shortdesc}}</p>
+                      <!-- Any additional fields you want to display from the filtered concept -->
+                    </div>
+                    <div ng-if="filteredConcept.length === 0">
+                      <p>No matching concept found.</p>
+                    </div>
+                  </div>
+          
+          </p>
+          <!--
+            <p>
+              <a href="#" class="btn btn-primary my-2">Main call to action</a>
+              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+            </p>
+          --> 
+         
+          </div>
+        </div>
+      </section>
+
+
+
+
+    <div>
+
+    <button onclick="loadSnippet('load-balancing')">Load Balancing</button>
+    <button onclick="loadSnippet('caching')">Caching</button>
+    <button onclick="loadSnippet('protocols')">Protocols</button>
+</div>
+    <!-- Content will be dynamically loaded into this div -->
+     <div class="container">
+        <div class="col-lg-1"></div>
+ 
+         <div id="snippet-content" class="col-lg-10"></div>
+         <div class="col-lg-1"></div>
+    </div>
+
+
+
+   
+</main>
+</div>
+
+
+<script>
+var app = angular.module('topics', []);
+
+app.controller('topicCtrl', function($scope, $http, $window) {
+  $scope.date = new Date();
+  $scope.filteredConcept = []; // Initialize the filtered concept
+
+  // Function to get the query parameter from the URL
+  function getQueryParam(param) {
+    var urlParams = new URLSearchParams($window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Function to load HTML snippet
+  function loadSnippet(snippet) {
+    const snippetPath = `snippets/${snippet}.html`;
+    console.log(snippetPath);
+
+    fetch(snippetPath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(data => {
+        // Inject the HTML content into the div
+        document.getElementById('snippet-content').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading snippet:', error);
+        document.getElementById('snippet-content').innerHTML = '<p>Error loading content. Please try again later.</p>';
+      });
+  }
+
+  // Get the 'url' query parameter
+  var conceptName = getQueryParam('url');
+
+  if (conceptName) {
+    // Fetch the external systemdesign.json file
+    $http.get('systemdesign.json').then(function(response) {
+      // Assign the data to $scope.TOPICS
+      $scope.TOPICS = response.data;
+
+      // Filter the content based on the query parameter
+      $scope.filteredConcept = $scope.TOPICS.filter(function(concept) {
+        return concept.url.toLowerCase() === conceptName.toLowerCase();
+      });
+
+      // If a match is found, call loadSnippet to load the corresponding HTML
+      if ($scope.filteredConcept.length > 0) {
+        console.log('Loading snippet for:', $scope.filteredConcept[0].url);
+        console.log($scope.filteredConcept[0]);
+        loadSnippet($scope.filteredConcept[0].url);  // Load the HTML snippet based on the filtered concept
+      } else {
+        console.warn('No matching concept found for the provided query parameter.');
+        document.getElementById('snippet-content').innerHTML = '<p>No matching content found.</p>';
+      }
+
+    }, function(error) {
+      console.error('Error loading systemdesign.json:', error);
+    });
+  } else {
+    console.warn('No query parameter found.');
+    document.getElementById('snippet-content').innerHTML = '<p>No content loaded due to missing query parameter.</p>';
+  }
+});
+
+
+
+  
+</script>
+
+          </body>
+          </html>
+          <html>
