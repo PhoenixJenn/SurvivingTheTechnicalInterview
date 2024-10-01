@@ -1,10 +1,35 @@
+<style>
+
+    li, li.spaced {
+        margin-bottom: 10px;
+    }
+</style>
+
+<a name="top"></a>
 
 
-<h2 class="title">What is Caching?</h2>
+<div class="row">
+    <div class="col-6 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Quicksync.png">
+        <b class="display-6 text-center " style="font-family:'KomikaAxis'; margin-left:16px">Quicksync</b></div>
+    <div class="col-6"> <h2 class="title">What is Caching?</h2>
+      <p> Caching is the process of storing frequently accessed data temporarily in a location that is faster to access than the original source. 
+        It helps reduce latency and improve application performance.
+    </p> 
+    <p>In this section, we'll cover:</p>
+    <ul>
+        <li><a href="#benefits">Benefits & Downsides</a></li>
+        <li><a href="#strategies">Caching Strategies</a></li>
+        <li><a href="#eviction">Eviction & Invalidation</a></li>
+        <li><a href="#loading">Loading & Reloading</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#failure">Ways Caching Could Go Wrong</a> (with villains!)</li>
+    </ul>
+    </div>
+    
+</div>
 <div>
     
-        Caching is the process of storing frequently accessed data temporarily in a location that is faster to access than the original source. 
-        It helps reduce latency and improve application performance.
+       
   
 </div>
 <br/>
@@ -14,14 +39,17 @@
 <h2 class="title">Types of Caching</h2>
 <div class="row"> 
     <div class="col-4">
-        <b>Client-Side Caching</b>
+        <b>CLIENT-SIDE CACHING</b><br/>
+        <b>Web Caching:</b> Speeds up web page load times by caching static content (HTML, CSS, JS).
         <ul>
         <li>Data is cached in the user's device (e.g., browser cache).</li>
         <li>Example: Web browser caches HTML, CSS, and JavaScript to reduce load times.</li>
         </ul> 
     </div>
     <div class="col-4">
-        <b>Server-Side Caching</b>
+        <b>SERVER-SIDE CACHING</b><br/>
+        <b>Database Caching:</b> Reduces database load by caching query results.<br/>
+        <b>API Caching:</b> Stores API responses for faster retrieval in future requests.
         <ul>
         <li>Data is cached on the server (e.g., database query results, API responses).</li>
         <li>Example: Server caches database query results to reduce load on the database.</li>
@@ -29,7 +57,8 @@
     </div>
     
     <div class="col-4">
-        <b>CDN (Content Delivery Network) Caching</b>
+        <b>CDN (Content Delivery Network) Caching</b><br/>
+        <b>CDN Caching:</b> Uses a distributed network of servers to cache static content closer to end users.
         <ul>
         <li>Data is cached in multiple locations across the globe, closer to the users.</li>
         <li>Example: Static assets (images, CSS) are cached on CDN servers to reduce latency for users in different regions.</li>
@@ -37,23 +66,16 @@
     </div>
 </div>
 
-    <hr class="colored text-center">
-     <br/>
-    <h2 class="title">Common Use Cases</h2>
-    <ul>
-    <li><b>Web Caching:</b> Speeds up web page load times by caching static content (HTML, CSS, JS).</li>
-    <li><b>Database Caching:</b> Reduces database load by caching query results.</li>
-    <li><b>API Caching:</b> Stores API responses for faster retrieval in future requests.</li>
-    <li><b>CDN Caching:</b> Uses a distributed network of servers to cache static content closer to end users.</li>
-    </ul>
-</div>    
     
+<a name="benefits"></a>
     <br/>
     <hr class="colored text-center">
-
+   
+ 
    <div class="row"> 
         <div class="col-6">
             <h2 class="title">Benefits of Caching</h2>
+            <div class="bg-success">&nbsp;</div>
             <span class="badge text-bg-success rounded-pill">PROs</span>
             <ul >
             <li> <b>Reduced Latency</b> <br/>Faster response times since data is retrieved from a nearby cache instead of the original source.</li>
@@ -64,6 +86,7 @@
         </div>
         <div  class="col-6">
             <h2 class="title">Potential Downsides of Caching</h2>
+            <div class="bg-warning">&nbsp;</div>
                 <span class="badge text-bg-warning rounded-pill">CONs</span>
             <ul  >
             <li><b>Cache Staleness</b> <br/>Cached data can become outdated, leading to users receiving old information.</li>
@@ -73,44 +96,87 @@
         </div>
         
 </div>
- 
-  
+<a href="#top">top</a>
+<a name="strategies"></a>
    <br/>
+
     <hr class="colored text-center">
     <h2 class="title">Key Caching Strategies</h2>
     <image src="/images/snip_cachingstrategies.png"></image></br><br/>
 
-    <b>Write-Through Cache:</b>  Writes are made to both the cache and the data store simultaneously.
-    <ul style=" list-style-type: none;">
-    <li><span class="badge text-bg-success rounded-pill">PRO</span>  Ensures the cache and data store are always in sync.</li>
-    <li><span class="badge text-bg-warning rounded-pill">CON</span>  May add a little overhead to write operations.<br/>&nbsp;</li>
-    <li><b>Use Case: </b> Read and Write Access. Data consistency is crucial, and the application cannot afford to have stale or inconsistent data between the cache and the database.  E-commerce. </li>
-    </ul>
 
-    <b>Write-Back (Write-Behind) Cache:</b> Cache provider has full control. Data is written to the cache first and to the database later, in batches.
-    <ul style=" list-style-type: none;">
-    <li><span class="badge text-bg-success rounded-pill">PRO</span>  Reduces write latency.</li>
-    <li><span class="badge text-bg-warning rounded-pill">CON</span>  Risk of data loss if the cache fails before writing to the database.<br/>&nbsp;</li>
-    <li><b>Use Case: </b> Write performance is critical, and tolerating some level of data inconsistency for a short period is acceptable. (Eventual Consistency) Reduces write pressure on database.  Online gaming score updates, bursty write updates.</li>    
-    </ul>
+    <div class="row">
+        <div class="col-6">
+            <b>WRITE-THROUGH CACHE</b> <br/>
+             Writes are made to both the cache and the data store simultaneously.<br/>
+            <b>Use Case: </b> Read and Write Access. Data consistency is crucial, and the application cannot afford to have stale or inconsistent data between the cache and the database.  E-commerce. 
+           
+            <br/>&nbsp;<br/>
+             <span class="badge text-bg-success rounded-pill">PRO</span>  
+             Ensures the cache and data store are always in sync.<br/> 
+             <span class="badge text-bg-warning rounded-pill">CON</span> 
+              May add a little overhead to write operations.
+             
+        </div>
+        <div class="col-6">
+            <b>WRITE-BACK (Write-Behind) CACHE</b><br/>
+             Cache provider has full control. Data is written to the cache first and to the database later, in batches.<br/>
+            <b>Use Case: </b> Write performance is critical, and tolerating some level of data inconsistency for a short period is acceptable. 
+            (Eventual Consistency) Reduces write pressure on database.  Online gaming score updates, bursty write updates.
+           
+            <br/>&nbsp;<br/>
+            <span class="badge text-bg-success rounded-pill">PRO</span>  
+            Reduces write latency.<br/> 
+            <span class="badge text-bg-warning rounded-pill">CON</span>  
+            Risk of data loss if the cache fails before writing to the database.
+            <br/>&nbsp;<br/>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-12 bg-warning">&nbsp;</div>
+</div>
+    <div class="row">
+        <div class="col-6">
+            <b>CACHE-ASIDE</b><br/>  Application has full control. The application reads from the database if not present in the cache. 
+            Data is loaded into the cache by the application when it is requested and not already present in cache(lazy loading).<br/>
+            <b>Use Case: </b> Read-Heavy. Suitable for more granular control over when and how the data should be loaded or updated in the cache.
+            
+            
+            <br/>&nbsp;<br/>
+             <span class="badge text-bg-success rounded-pill">PRO</span>  
+             Only frequently requested data is cached.<br/> 
+            <span class="badge text-bg-warning rounded-pill">CON</span>  
+            Application has more responsibility/complexity. Initial request for data is slower if not in the cache.<br/>&nbsp;</li>
+            
+        </div>
+        <div class="col-6">
+            <b>READ-THROUGH CACHE</b><br/> Cache provider has full control. The application only interacts with the cache. 
+            Data is loaded into the cache by the cache provider when it is requested and not already present in cache(lazy loading). 
+            Application has full control.<br/>
+            <b>Use Case: </b>Read-Heavy. Suitable for scenarios where there is frequent reading of data that may not change often.
+            <br/>&nbsp;<br/>
+             
+            <span class="badge text-bg-success rounded-pill">PRO</span>  
+            More automated as the application doesn’t need to manage cache misses or database lookups 
+            explicitly—everything is abstracted through the cache.<br/> 
+            <span class="badge text-bg-warning rounded-pill">CON</span>  
+            Initial request for data is slower if not in the cache. The cache needs to be aware of both data storage and retrieval from the underlying data store, which adds operational complexity. 
+           
+        </div>
+    </div>
+  
+
+  
 
 
-    <b>Cache-aside:</b>  Application has full control. The application reads from the database if not present in the cache. Data is loaded into the cache by the application when it is requested and not already present in cache(lazy loading).
-    <ul style=" list-style-type: none;">
-    <li><span class="badge text-bg-success rounded-pill">PRO</span>  Only frequently requested data is cached.</li>
-    <li><span class="badge text-bg-warning rounded-pill">CON</span>  Application has more responsibility/complexity. Initial request for data is slower if not in the cache.<br/>&nbsp;</li>
-    <li><b>Use Case: </b> Read-Heavy. Suitable for more granular control over when and how the data should be loaded or updated in the cache.</li>
-    </ul>
+   
 
-    <b>Read-through:</b> Cache provider has full control. The application only interacts with the cache. Data is loaded into the cache by the cache provider when it is requested and not already present in cache(lazy loading). Application has full control.
-    <ul style=" list-style-type: none;">
-    <li><span class="badge text-bg-success rounded-pill">PRO</span>  More automated as the application doesn’t need to manage cache misses or database lookups explicitly—everything is abstracted through the cache.</li>
-    <li><span class="badge text-bg-warning rounded-pill">CON</span>  Initial request for data is slower if not in the cache. The cache needs to be aware of both data storage and retrieval from the underlying data store, which adds operational complexity.<br/>&nbsp;</li>
-    <li><b>Use Case: </b>Read-Heavy. Suitable for scenarios where there is frequent reading of data that may not change often.</li>
-</ul>
+   
 
 
 <br/>
+<a href="#top">top</a>
+<a name="eviction"></a>
 <hr class="colored text-center">
 
 <div class="row">
@@ -141,185 +207,12 @@
 </div>
 
    <br/>
-
+   <a href="#top">top</a>
+   <a name="loading"></a>
    <hr class="colored text-center">
-
-<br/> 
-<h2 class="title">Solutions</h2>
-Here’s a list of popular caching solutions and example use cases for each:
-
-<h3 class="title">1. Redis <a href="https://redis.io/" target="_blank">redis.io</a></h3>
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/> An open-source, in-memory data structure store that supports a wide range of data types such as strings, hashes, lists, sets, and sorted sets. Low-latency, in-memory storage for caching or fast access to frequently accessed data.
-    
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Session storage for web applications. Redis is often used to store user session data in a way that’s fast to access and modify, which is critical for user authentication and interaction on high-traffic websites.
-     
-    </div>
-    <div class="col-4">  <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> An e-commerce website stores user shopping cart data in Redis to provide real-time updates and fast retrieval of the cart content.Temporary storage for session data, API response caching, or leaderboards.  Simple real-time messaging without the need for data persistence or replay.
-    </div>
-</div>
- 
-   
-   
-
-
-<h3 class="title">2. Memcached <a href="https://memcached.org/" target="_blank">memcached.org</a></h3>
- <div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/>A high-performance, open-sourced, distributed memory caching system designed to speed up dynamic web applications by caching data and objects in RAM.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Database query caching. Memcached is often used to cache the results of expensive database queries to reduce load on the database and provide faster responses to the client.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A social media platform caches frequently accessed user profile data to reduce repeated database queries for the same information.
-    </div>
-
- </div>
-
-<h3 class="title">3. Varnish Cache <a href="https://varnish-cache.org/" target="_blank">varnish-cache.org</a></h3>
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span><br/>  A web application accelerator also known as a caching HTTP reverse proxy. Varnish caches HTTP content and accelerates the delivery of web pages.
-  
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/>Content delivery. Varnish is often used to cache and serve static assets like HTML, CSS, and images, significantly speeding up website load times.
-    
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A news website uses Varnish to cache popular articles and serve them quickly to readers, reducing load on their web servers.
-   
-    </div>
-
- </div>
-
-<h3 class="title">4. Amazon ElastiCache (for Redis and Memcached) <a href="https://aws.amazon.com/pm/elasticache/" target="_blank">aws.amazon.com/pm/elasticache</a></h3> 
- 
-       
-    
-
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/> A fully managed, in-memory caching service by AWS that supports Redis and Memcached.
-
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Scaling caching infrastructure. With ElastiCache, you can offload the management of Redis or Memcached instances, allowing them to scale automatically with application demand.
-   
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A video streaming platform uses Amazon ElastiCache to store user preferences and metadata, enabling fast access to personalized content for millions of users.
-    </div>
- </div>
-
-
-<h3 class="title">5. Azure Cache for Redis <a href="https://azure.microsoft.com/en-us/products/cache" target="_blank">azure.microsoft.com/en-us/products/cache</a></h3> 
- <div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/> A fully managed Redis cache provided by Microsoft Azure that can be used to improve application performance.
-   
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Caching API responses. Azure Cache for Redis can be used to cache API responses in cloud-native applications, reducing the need to call back-end services for the same data repeatedly.
-     
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A fintech application uses Azure Cache for Redis to cache frequently requested financial data like exchange rates and stock prices.
-    </div>
- </div>
-
-<h3 class="title">6. Apache Kafka  <a href="https://kafka.apache.org/" target="_blank">kafka.apache.org</a></h3> 
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/>While primarily a distributed event streaming platform, Kafka’s streaming data can act as a form of real-time cache when combined with systems that consume the stream.
-   
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Streaming data cache. Kafka is used to provide real-time updates for systems processing high-velocity data, acting as a transient cache for fast-moving streams of information.
-  
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A financial services company uses Kafka to provide real-time updates on stock prices to their clients, where the latest data is cached momentarily for rapid access.
-    </div>
- </div>
-
-
-<h3 class="title">7. Ehcache <a href="https://www.ehcache.org/" target="_blank">www.ehcache.org</a></h3> 
-
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/>A widely used open-source Java-based cache that can be embedded in applications and is highly customizable.
-   
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Caching database results in Java applications. Ehcache is often used to speed up Hibernate-based Java applications by caching entity data.
-  
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A large enterprise CRM application uses Ehcache to cache frequently accessed customer data to reduce the number of calls to the database.
-    </div>
- </div>
-
-
-<h3 class="title">8. F5 Nginx Cache <a href="https://github.com/nginx/nginx" target="_blank">github.com/nginx/nginx</a></h3> 
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/> A caching mechanism built into the Nginx web server to cache HTTP responses.
-
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Reverse proxy caching. Nginx can be used to cache HTTP requests at the edge to reduce the load on web servers and deliver faster response times to clients.
-
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A SaaS company uses Nginx Cache to serve cached copies of frequently accessed dashboard data, reducing server load during peak times.
-    </div>
- </div>
-
-
-<h3 class="title">9. Squid Cache <a href="https://www.squid-cache.org/" target="_blank">www.squid-cache.org</a></h3> 
-<div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/>A caching proxy for the web, supporting HTTP, HTTPS, and FTP protocols.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Proxy caching. Squid can be used to cache and filter web traffic, improving performance and reducing bandwidth usage for organizations.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> An educational institution uses Squid Cache to store copies of frequently accessed educational websites, improving load times for students while reducing internet bandwidth costs.
-    </div>
- </div>
-
-
-
-<h3 class="title">10. Google Cloud Memorystore <a href="https://cloud.google.com/memorystore" target="_blank">cloud.google.com/memorystore</a></h3> 
- 
- <div class="row">
-    <div class="col-4">
-        <span class="badge text-bg-dark rounded-pill">DESCRIPTION</span> <br/> A fully managed Redis and Memcached service from Google Cloud.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-success rounded-pill">USE CASE</span><br/> Reducing latency for cloud-based applications. Memorystore can be used to cache frequently accessed data like user profiles or API responses.
-    </div>
-    <div class="col-4">
-        <span class="badge text-bg-warning rounded-pill">EXAMPLE</span><br/> A gaming platform hosted on Google Cloud uses Memorystore to cache game state data for real-time multiplayer interactions, ensuring low-latency responses during gameplay.
-    </div>
-
- </div>
-
-
-
-
 
 <br/>
 
-<hr class="colored text-center">
-
-<br/> 
 
 
 
@@ -327,87 +220,105 @@ Here’s a list of popular caching solutions and example use cases for each:
 
 To reload the cache without overwhelming servers after a cache failure, you can use a strategy known as "cache warming" or a graceful cache reload strategy. This approach ensures that the system gradually reloads cached data, preventing a sudden spike in traffic to the backend services. Here are a few strategies to achieve this:
 <h3 class="title">1. Lazy Loading (Cache-aside Pattern)</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: With lazy loading, if the cache is empty or expired, the application only requests data from the server when it's needed. When a cache miss occurs, the application retrieves the data from the database or backend service, stores it in the cache, and then serves the request.
+<ul style=" list-style-type: none;">
+    <li><b>HOW IT WORKS</b><br/>
+         With lazy loading, if the cache is empty or expired, the application only requests data from the server when it's needed. When a cache miss occurs, the application retrieves the data from the database or backend service, stores it in the cache, and then serves the request.
     </li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span> Lazy loading distributes the load over time since only data that is actually requested gets reloaded into the cache, rather than trying to reload everything at once. This reduces the risk of overwhelming backend servers with a flood of requests.
+    <li><span class="badge text-bg-success rounded-pill">PROs</span> <br/>
+        Lazy loading distributes the load over time since only data that is actually requested gets reloaded into the cache, rather than trying to reload everything at once. This reduces the risk of overwhelming backend servers with a flood of requests.
     </li>
-    <li><span class="badge text-bg-danger rounded-pill">Drawback:</span> Initial requests might be slow, and if the cache fails during high traffic periods, it could still cause a burst of traffic to the backend.
+    <li><span class="badge text-bg-danger rounded-pill">CONS</span><br/>
+         Initial requests might be slow, and if the cache fails during high traffic periods, it could still cause a burst of traffic to the backend.
     </li>
 </ul>
 
 <h3 class="title">2. Cache Warming (Pre-Populating Cache)</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: After a cache failure, instead of waiting for requests to populate the cache on demand, you can proactively pre-populate or "warm" the cache by sequentially reloading critical data into it. This can be done gradually during off-peak times to avoid overwhelming backend systems.
+<ul style=" list-style-type: none;">
+    <li> <b>HOW IT WORKS</b><br/>
+         After a cache failure, instead of waiting for requests to populate the cache on demand, you can proactively pre-populate or "warm" the cache by sequentially reloading critical data into it. This can be done gradually during off-peak times to avoid overwhelming backend systems.
         Implementation: You could schedule a background task to retrieve the most frequently accessed data (or essential datasets) from the database and populate the cache in small batches. You can use rate limiting to control the flow of requests to the backend.
     </li>
-    <li> <span class="badge text-bg-success rounded-pill">Why it helps:</span>  Cache warming ensures that important data is available in the cache immediately after it is restored, preventing initial cache misses from causing performance degradation or backend overload.
+    <li> <span class="badge text-bg-success rounded-pill">PROs</span>
+        <br/>  Cache warming ensures that important data is available in the cache immediately after it is restored, preventing initial cache misses from causing performance degradation or backend overload.
     </li>
      
 </ul>
 
 <h3 class="title">3. Rate-Limited Cache Refill</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: When the cache is empty or expired, you can implement a rate limiter to control the number of requests sent to the backend servers during cache misses. Instead of allowing all cache misses to immediately hit the backend, the rate limiter staggers the requests and fills the cache gradually.
+<ul style=" list-style-type: none;">
+    <li> <b>HOW IT WORKS</b><br/>
+         When the cache is empty or expired, you can implement a rate limiter to control the number of requests sent to the backend servers during cache misses. Instead of allowing all cache misses to immediately hit the backend, the rate limiter staggers the requests and fills the cache gradually.
         Implementation: You can set a cap on the number of cache misses allowed per second (or another time interval) and throttle the backend requests accordingly.
      
     </li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span>  This prevents the backend from being overwhelmed with a surge of requests and keeps system performance stable while the cache is being reloaded.
+    <li><span class="badge text-bg-success rounded-pill">PROs</span> 
+        <br/> This prevents the backend from being overwhelmed with a surge of requests and keeps system performance stable while the cache is being reloaded.
     </li>
     
 </ul>
 
 
 <h3 class="title">4. Exponential Backoff with Jitter</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: When the cache misses and a request goes to the backend, the application can employ an exponential backoff strategy with jitter (random delays) to gradually retry requests if they initially fail. This prevents overwhelming the backend during cache failures or high traffic conditions.
+<ul style=" list-style-type: none;">
+    <li> <b>HOW IT WORKS</b><br/>
+        When the cache misses and a request goes to the backend, the application can employ an exponential backoff strategy with jitter (random delays) to gradually retry requests if they initially fail. This prevents overwhelming the backend during cache failures or high traffic conditions.
         Implementation: After a cache miss, if multiple requests for the same data are sent, you can delay the retries, increasing the delay with each subsequent request and adding a randomized delay (jitter) to avoid sudden spikes in backend traffic.
     
     </li>
-    <li> <span class="badge text-bg-success rounded-pill">Why it helps:</span>  Exponential backoff spreads the load over time by increasing the delay between consecutive retries and adding randomness (jitter) to prevent synchronized bursts of traffic to the backend.
+    <li> <span class="badge text-bg-success rounded-pill">PROs</span> <br/>
+         Exponential backoff spreads the load over time by increasing the delay between consecutive retries and adding randomness (jitter) to prevent synchronized bursts of traffic to the backend.
     </li>
    
 </ul>
 
 <h3 class="title">5. Stale-While-Revalidate</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: In this strategy, when the cache is expired or missing, instead of immediately invalidating the cached data, you can serve the stale data from the cache while simultaneously refreshing it in the background. The new data will be loaded into the cache for future requests, but users won't experience a delay.
+<ul style=" list-style-type: none;">
+    <li><b>HOW IT WORKS</b><br/>
+         In this strategy, when the cache is expired or missing, instead of immediately invalidating the cached data, you can serve the stale data from the cache while simultaneously refreshing it in the background. The new data will be loaded into the cache for future requests, but users won't experience a delay.
     </li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span>  This prevents a flood of requests to the backend servers, as most of the user requests are still served by the stale cache while the new data is being retrieved asynchronously.
+    <li><span class="badge text-bg-success rounded-pill">PROs</span> <br/>
+         This prevents a flood of requests to the backend servers, as most of the user requests are still served by the stale cache while the new data is being retrieved asynchronously.
     </li>
-    <li><span class="badge text-bg-danger rounded-pill">Drawback:</span> Users may be served slightly outdated data while the cache is being refreshed, but it prevents backend overload and can be acceptable for certain types of applications (e.g., where exact real-time data isn’t critical).
+    <li><span class="badge text-bg-danger rounded-pill">CONS</span> 
+        <br/>Users may be served slightly outdated data while the cache is being refreshed, but it prevents backend overload and can be acceptable for certain types of applications (e.g., where exact real-time data isn’t critical).
     </li>
 </ul>
 
 
 <h3 class="title">6. Distributed Locking (Thundering Herd Prevention)</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: When a cache miss occurs for a given key, you can implement a distributed locking mechanism to ensure that only one request fetches the data from the backend, while other requests wait until the cache is updated. Once the data is fetched and added to the cache, subsequent requests use the newly populated cache.
+<ul style=" list-style-type: none;">
+    <li>    <b>HOW IT WORKS</b><br/>
+         When a cache miss occurs for a given key, you can implement a distributed locking mechanism to ensure that only one request fetches the data from the backend, while other requests wait until the cache is updated. Once the data is fetched and added to the cache, subsequent requests use the newly populated cache.
         Implementation: Use a distributed lock (e.g., using Redis or another distributed system) to ensure that only one request fetches data while others wait.
      
     </li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span>  This prevents the thundering herd problem, where multiple requests for the same resource trigger a sudden burst of traffic to the backend. By allowing only one request to fetch the data, you reduce the load on backend services.
+    <li><span class="badge text-bg-success rounded-pill">PROs</span> <br/>
+         This prevents the thundering herd problem, where multiple requests for the same resource trigger a sudden burst of traffic to the backend. By allowing only one request to fetch the data, you reduce the load on backend services.
     </li>
      
 </ul>
 
 <h3 class="title">7. Hierarchical Caching</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: Use multiple layers of caching (e.g., local in-memory cache, Redis cache, and CDN cache) to minimize the load on the primary backend. If one layer of cache fails, requests fall back to another layer before hitting the backend. </li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span>  This reduces the chance of overwhelming the primary backend since requests are distributed across multiple cache layers. It also improves resilience because even if one cache layer fails, data can be retrieved from another. </li>
+<ul style=" list-style-type: none;">
+    <li> <b>HOW IT WORKS</b><br/>
+         Use multiple layers of caching (e.g., local in-memory cache, Redis cache, and CDN cache) to minimize the load on the primary backend. If one layer of cache fails, requests fall back to another layer before hitting the backend. </li>
+    <li><span class="badge text-bg-success rounded-pill">PROs</span> <br/>
+         This reduces the chance of overwhelming the primary backend since requests are distributed across multiple cache layers. It also improves resilience because even if one cache layer fails, data can be retrieved from another. </li>
     <li>Example: A local in-memory cache on each server serves the first request. If that cache fails, the system falls back to a distributed cache (like Redis). If Redis is unavailable, it falls back to the origin database.</li>
 </ul>
 
 
 <h3 class="title">8. Partitioned Cache Reload (Sharding)</h3>
-<ul>
-    <li><span class="badge bg-info-subtle text-info-emphasis rounded-pill">How it works</span>: Partition the cache by data segments (e.g., user IDs, geographic regions, or service types) and reload only the segments that are frequently accessed first. This reduces the overall load on the backend while gradually repopulating the cache in smaller pieces.
+<ul style=" list-style-type: none;">
+    <li> <b>HOW IT WORKS</b><br/>
+         Partition the cache by data segments (e.g., user IDs, geographic regions, or service types) and reload only the segments that are frequently accessed first. This reduces the overall load on the backend while gradually repopulating the cache in smaller pieces.
         Implementation: Divide your cache into logical segments and prioritize reloading the most critical or popular data first.</li>
-    <li><span class="badge text-bg-success rounded-pill">Why it helps:</span>  By focusing only on reloading the "hot" parts of the cache (i.e., data most frequently accessed), you minimize the number of requests hitting the backend at once.    </li>
+    <li><span class="badge text-bg-success rounded-pill">PROs</span><br/>
+          By focusing only on reloading the "hot" parts of the cache (i.e., data most frequently accessed), you minimize the number of requests hitting the backend at once.    </li>
       
 </ul>
-
-
+<a href="#top">top</a>
+<br/><br/>
 <B>Combining Strategies</B><br/>
 In practice, it’s common to combine multiple strategies. For example, 
 you might use stale-while-revalidate to serve data while gradually refreshing the 
@@ -429,7 +340,7 @@ while maintaining acceptable performance for users.
 
 
 <br/>
-
+<a name="failure"></a>
 <hr class="colored text-center">
 
 <br/> 
@@ -445,123 +356,514 @@ while maintaining acceptable performance for users.
 </p>
 
 <h3 class="title">1. Cache Staleness</h3>
-<ul>
-    <li>Problem: The cache holds outdated data, and users are served stale information after the underlying data has changed.</li>
-    <li>Why it Happens: Caches typically have time-to-live (TTL) settings or expiration policies. If data changes frequently but isn’t updated in the cache promptly, users could get stale data, which can lead to incorrect results.
-    </li>
-    <li>Example: A news website caches articles, but a breaking news update is published, and users continue to see the old version due to stale cache entries.
-    </li>
-    <li>Mitigation: Implement cache invalidation strategies, such as stale-while-revalidate, and set appropriate TTLs to ensure data is refreshed regularly.
-    </li>
-</ul>
+<div class="row">
+<div class="col-8">
+    <ul style=" list-style-type: none; ">
+        <li class="spaced"><b>PROBLEM</b><br/>
+            The cache holds outdated data, and users are served stale information after the underlying data has changed.</li>
+        <li class="spaced"> <b>WHY IT HAPPENS</b> <br/>
+            Caches typically have time-to-live (TTL) settings or expiration policies. If data changes frequently but isn’t updated in the cache promptly, users could get stale data, which can lead to incorrect results.
+        </li>
+        <li class="spaced"><b>EXAMPLE</b><br/>
+            A news website caches articles, but a breaking news update is published, and users continue to see the old version due to stale cache entries.
+        </li>
+        <li class="spaced"><b>MITIGATION</b><br/>
+            Implement cache invalidation strategies, such as stale-while-revalidate, and set appropriate TTLs to ensure data is refreshed regularly.
+        </li>
+        </ul>
+</div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Lagdrain.png">
+    Lagdrain could be responsible for keeping cached data outdated and creating latency between cache updates and the actual data, leading to stale responses.
+    </div>
+</div>
+
+
 
 
 <h3 class="title">2. Cache Invalidation Complexity</h3>
-<ul>
-    <li>Problem: Invalidating cache entries becomes complex, especially in distributed systems, leading to inconsistent or stale data.</li>
-    <li>Why it Happens: Cache invalidation (removing or updating stale data) is inherently hard. It's difficult to ensure all instances of cached data across distributed systems are invalidated correctly, especially when multiple sources can modify the data. </li>
-    <li>Example: An e-commerce platform caches product prices but fails to invalidate the cache after prices are updated, causing some users to see incorrect pricing. </li>
-    <li> Mitigation: Use event-driven invalidation, where changes in the source trigger cache invalidation, or ensure careful implementation of TTLs, versioning, or write-through caching.    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                Invalidating cache entries becomes complex, especially in distributed systems, leading to inconsistent or stale data.</li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 Cache invalidation (removing or updating stale data) is inherently hard. It's difficult to ensure all instances of cached data across distributed systems are invalidated correctly, especially when multiple sources can modify the data. </li>
+            <li><b>EXAMPLE</b><br/>
+                 An e-commerce platform caches product prices but fails to invalidate the cache after prices are updated, causing some users to see incorrect pricing. </li>
+            <li> <b>MITIGATION</b><br/>
+                 Use event-driven invalidation, where changes in the source trigger cache invalidation, or ensure careful implementation of TTLs, versioning, or write-through caching.    </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Sprawl.png">
+        Captain Sprawl, known for scope creep and technical debt, could represent the complexities involved in cache invalidation. He creates sprawling dependencies that make it difficult to invalidate the right cache entries, causing inconsistencies.
+    </div>
+</div>
+
 
 
 <h3 class="title">3. Cache Stampede (Thundering Herd)</h3>
-<ul>
-    <li>Problem: A sudden spike in cache misses causes many requests to hit the backend at the same time, overwhelming the servers. </li>
-    <li>Why it Happens: If many users request the same data simultaneously and it’s not found in the cache (cache miss), all those requests will go to the backend, causing a "stampede."</li>
-    <li>Example: After cache invalidation or expiry, thousands of users request the same homepage, resulting in all requests hitting the backend, leading to server overload. </li>
-    <li>Mitigation: Implement distributed locking, rate limiting, or stale-while-revalidate to prevent multiple requests from querying the backend simultaneously. </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 A sudden spike in cache misses causes many requests to hit the backend at the same time, overwhelming the servers. </li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 If many users request the same data simultaneously and it’s not found in the cache (cache miss), all those requests will go to the backend, causing a "stampede."</li>
+            <li><b>EXAMPLE</b><br/>
+                 After cache invalidation or expiry, thousands of users request the same homepage, resulting in all requests hitting the backend, leading to server overload. </li>
+            <li><b>MITIGATION</b><br/>
+                 Implement distributed locking, rate limiting, or stale-while-revalidate to prevent multiple requests from querying the backend simultaneously. </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Chaosbringer.png">
+        Chaosbringer, with his ability to create bottlenecks and disrupt system stability, would represent the thundering herd problem, where multiple requests overwhelm the backend due to a cache miss.
+    </div>
+</div>
+
 
 <h3 class="title">4. Cache Poisoning</h3>
-<ul>
-    <li>Problem: Malicious or incorrect data is cached, and users are served corrupted or malicious data.</li>
-    <li>Why it Happens: Cache poisoning can occur when invalid or manipulated data gets cached, leading to performance issues or security vulnerabilities. Attackers can exploit this by inserting harmful data into the cache.</li>
-    <li>Example: A web application caches the result of an insecure API call, leading to cached responses being used in place of legitimate data. </li>
-    <li>Mitigation: Use input validation, proper cache key generation, and secure data handling practices to prevent poisoned data from entering the cache.  </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 Malicious or incorrect data is cached, and users are served corrupted or malicious data.</li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 Cache poisoning can occur when invalid or manipulated data gets cached, leading to performance issues or security vulnerabilities. Attackers can exploit this by inserting harmful data into the cache.</li>
+            <li><b>EXAMPLE</b><br/>
+                 A web application caches the result of an insecure API call, leading to cached responses being used in place of legitimate data. </li>
+            <li><b>MITIGATION</b><br/>
+                 Use input validation, proper cache key generation, and secure data handling practices to prevent poisoned data from entering the cache.  </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Nullify.png">
+        Nullify would be perfect for representing cache poisoning by injecting malicious or incorrect data into the cache, resulting in compromised or unreliable data being served to users.
+    </div>
+</div>
+
 
 <h3 class="title">5. Excessive Memory Usage (Cache Eviction Problems)</h3>
-<ul>
-    <li>Problem: The cache uses too much memory, leading to eviction of important data or causing the system to run out of resources.</li>
-    <li>Why it Happens: If too much data is cached or if the cache isn’t properly configured to evict less important data, the cache can grow uncontrollably, leading to resource exhaustion or excessive evictions. </li>
-    <li> Example: An application caches too many results from database queries, causing memory to run out and leading to frequent cache evictions of critical data.  </li>
-    <li>Mitigation: Set appropriate cache size limits, use efficient eviction policies like LRU (Least Recently Used), LFU (Least Frequently Used), or FIFO (First-In, First-Out), and monitor memory usage.  </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                The cache uses too much memory, leading to eviction of important data or causing the system to run out of resources.</li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 If too much data is cached or if the cache isn’t properly configured to evict less important data, the cache can grow uncontrollably, leading to resource exhaustion or excessive evictions. </li>
+            <li> <b>EXAMPLE</b><br/>
+                An application caches too many results from database queries, causing memory to run out and leading to frequent cache evictions of critical data.  </li>
+            <li><b>MITIGATION</b><br/>
+                 Set appropriate cache size limits, use efficient eviction policies like LRU (Least Recently Used), LFU (Least Frequently Used), or FIFO (First-In, First-Out), and monitor memory usage.  </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Petabyte.png">
+        Petabyte, who increases data and pushes systems to their limits, would be responsible for excessive cache memory usage, leading to frequent evictions and exhaustion of system resources.
+    </div>
+</div>
+
 
 <h3 class="title">6. Cache Overhead and Latency</h3>
-<ul>
-    <li>Problem: The process of checking the cache or managing it can introduce extra latency, especially in cases where the cache itself is not properly optimized.    </li>
-    <li>Why it Happens: If the cache lookup process is slow, or if the cache is located far from the application (network latency), accessing the cache might add more overhead than fetching data directly from the source.    </li>
-    <li>Example: A poorly configured distributed cache has higher network latency, causing slower responses than directly querying a nearby database.  </li>
-    <li>Mitigation: Use local caching (e.g., in-memory) where possible, optimize cache lookup times, and ensure geographically distributed caches for global applications.    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 The process of checking the cache or managing it can introduce extra latency, especially in cases where the cache itself is not properly optimized.    </li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 If the cache lookup process is slow, or if the cache is located far from the application (network latency), accessing the cache might add more overhead than fetching data directly from the source.    </li>
+            <li><b>EXAMPLE</b><br/>
+                 A poorly configured distributed cache has higher network latency, causing slower responses than directly querying a nearby database.  </li>
+            <li><b>MITIGATION</b><br/>
+                 Use local caching (e.g., in-memory) where possible, optimize cache lookup times, and ensure geographically distributed caches for global applications.    </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Lagdrain.png">
+        Lagdrain would also be associated with adding latency due to inefficient cache lookups or causing overhead in cache operations, resulting in degraded performance.
+    </div>
+</div>
+
 
 
 <h3 class="title">7. Inconsistent Data Across Multiple Cache Nodes</h3>
-<ul>
-    <li>Problem: When using distributed caches, data inconsistency can occur if cache updates are not properly propagated across all cache nodes. </li>
-    <li>Why it Happens: In large-scale distributed caching systems, data may not be synchronized properly between nodes, leading to different users receiving different versions of cached data. </li>
-    <li>Example: In a multi-region application, users in one region may see updated content while users in another region still see old, cached content due to a propagation delay.  </li>
-    <li> Mitigation: Use consistent hashing and cache replication to ensure data consistency across distributed caches, and leverage mechanisms like write-through caches to update caches uniformly.  </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 When using distributed caches, data inconsistency can occur if cache updates are not properly propagated across all cache nodes. </li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 In large-scale distributed caching systems, data may not be synchronized properly between nodes, leading to different users receiving different versions of cached data. </li>
+            <li><b>EXAMPLE</b><br/>
+                In a multi-region application, users in one region may see updated content while users in another region still see old, cached content due to a propagation delay.  </li>
+            <li> <b>MITIGATION</b><br/>
+                 Use consistent hashing and cache replication to ensure data consistency across distributed caches, and leverage mechanisms like write-through caches to update caches uniformly.  </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Nullify.png">
+       Nullify could cause inconsistencies across distributed cache nodes, leading to different users seeing different versions of cached data.
+    </div>
+</div>
+
 
 <h3 class="title">8. Unnecessary Caching</h3>
-<ul>
-    <li>Problem: Some data may be cached unnecessarily, leading to wasted resources and complicating the system without real performance benefits. </li>
-    <li>Why it Happens: Developers may over-cache data that doesn’t need to be cached, especially if that data is rarely accessed or inexpensive to retrieve. </li>
-    <li>Example: An application caches large amounts of static data that seldom changes, but this data could easily be served directly without affecting performance.</li>
-    <li>Mitigation: Analyze your caching strategy and focus on caching only high-impact, frequently-accessed data.  </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 Some data may be cached unnecessarily, leading to wasted resources and complicating the system without real performance benefits. </li>
+            <li> <b>WHY IT HAPPENS</b> <br/>
+                 Developers may over-cache data that doesn’t need to be cached, especially if that data is rarely accessed or inexpensive to retrieve. </li>
+            <li>
+                <b>EXAMPLE</b><br/>
+                 An application caches large amounts of static data that seldom changes, but this data could easily be served directly without affecting performance.</li>
+            <li><b>MITIGATION</b><br/>
+                 Analyze your caching strategy and focus on caching only high-impact, frequently-accessed data.  </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Sprawl.png">
+        Captain Sprawl could also be responsible for unnecessary caching, encouraging over-caching of data that doesn’t need to be cached, 
+        which complicates systems and wastes resources.
+    </div>
+</div>
+
 
 <h3 class="title"> 9. Key Collisions</h3>
-<ul>
-    <li>Problem: Different data can be cached under the same cache key, leading to incorrect data being served.</li>
-    <li> Why it Happens: Poorly designed cache keys or hashing algorithms can lead to key collisions, where multiple pieces of data map to the same key.
-    </li>
-    <li>Example: User profiles for different users may be cached under the same key due to key collisions, leading to users seeing incorrect data.
-    </li>
-    <li>Mitigation: Use unique and well-designed cache keys that incorporate important identifying information (e.g., user ID, data type, etc.).
-    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 Different data can be cached under the same cache key, leading to incorrect data being served.</li>
+            <li>  <b>WHY IT HAPPENS</b> <br/>
+                Poorly designed cache keys or hashing algorithms can lead to key collisions, where multiple pieces of data map to the same key.
+            </li>
+            <li><b>EXAMPLE</b><br/>
+                User profiles for different users may be cached under the same key due to key collisions, leading to users seeing incorrect data.
+            </li>
+            <li><b>MITIGATION</b><br/>
+                 Use unique and well-designed cache keys that incorporate important identifying information (e.g., user ID, data type, etc.).
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Count.png">
+        The Count, with his focus on database type selection and complex data design patterns, could represent key collisions,
+         where poor design results in different pieces of data being cached under the same key.
+    </div>
+</div>
+
 
 <h3 class="title">10. Cache Not Being Used Properly (Cache Miss Penalty)</h3>
-<ul>
-    <li> Problem: A cache may have a high miss rate, causing frequent lookups to hit the backend instead of serving from cache, which defeats the purpose of having a cache.
-    </li>
-    <li> Why it Happens: This occurs when the cache is either too small, TTLs are too short, or the wrong data is being cached.
-    </li>
-    <li> Example: A web application caches infrequently requested pages, resulting in a high number of cache misses, which leads to excessive backend queries and no significant performance gain.
-    </li>
-    <li> Mitigation: Monitor cache hit/miss ratios, adjust TTLs, and ensure that you are caching high-value, frequently accessed data.
-    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li> <b>PROBLEM</b><br/>
+                 A cache may have a high miss rate, causing frequent lookups to hit the backend instead of serving from cache, which defeats the purpose of having a cache.
+            </li>
+            <li>  <b>WHY IT HAPPENS</b> <br/>
+                 This occurs when the cache is either too small, TTLs are too short, or the wrong data is being cached.
+            </li>
+            <li> <b>EXAMPLE</b><br/>
+                 A web application caches infrequently requested pages, resulting in a high number of cache misses, which leads to excessive backend queries and no significant performance gain.
+            </li>
+            <li> <b>MITIGATION</b><br/>
+                Monitor cache hit/miss ratios, adjust TTLs, and ensure that you are caching high-value, frequently accessed data.
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Deadlock.png">
+        Deadlock could be the villain responsible for causing cache misses that result in frequent trips to the backend, 
+        preventing efficient use of the cache and leading to poor system performance.
+    </div>
+</div>
+
 
 <h3 class="title"> 11. Cache Coherency Issues</h3>
-<ul>
-    <li> Problem: Cache coherency refers to maintaining consistency between different caches or between a cache and the underlying data source.
-    </li>
-    <li> Why it Happens: If data in the cache becomes out of sync with the source of truth (e.g., database), applications may work with incorrect or stale data.
-    </li>
-    <li>  Example: A microservices architecture where one service updates data, but the cache used by other services is not invalidated, leading to inconsistent data views.
-    </li>
-    <li>  Mitigation: Use strategies like write-through, write-back, or event-driven cache invalidation to ensure that cached data remains consistent.
-    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li><b>PROBLEM</b><br/>
+                 Cache coherency refers to maintaining consistency between different caches or between a cache and the underlying data source.
+            </li>
+            <li>  <b>WHY IT HAPPENS</b> <br/>
+                 If data in the cache becomes out of sync with the source of truth (e.g., database), applications may work with incorrect or stale data.
+            </li>
+            <li> <b>EXAMPLE</b><br/>
+                 A microservices architecture where one service updates data, but the cache used by other services is not invalidated, leading to inconsistent data views.
+            </li>
+            <li>  <b>MITIGATION</b><br/>
+                 Use strategies like write-through, write-back, or event-driven cache invalidation to ensure that cached data remains consistent.
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Lagdrain.png">
+        Lagdrain would again be involved in creating cache coherency issues, causing discrepancies between cached data and the original data source, 
+        leading to unreliable information being served.
+    </div>
+</div>
+
 
 <h3 class="title">12. Cache Hit Penalty</h3>
-<ul>
-    <li>  Problem: Cache hit penalties can arise if cache reads are slow or not optimized, leading to unexpected performance degradation.
-    </li>
-    <li> Why it Happens: While cache hits should be fast, poorly designed caches or heavy computation involved in cache lookups can actually slow down the system.
-    </li>
-    <li>  Example: A Redis cache lookup may involve a complicated serialization/deserialization process that adds latency, causing slow responses even for cache hits.
-    </li>
-    <li>  Mitigation: Optimize cache lookup performance by simplifying cache access logic and ensuring minimal overhead in cache management operations.
-    </li>
-</ul>
+<div class="row">
+    <div class="col-8">
+        <ul style=" list-style-type: none;">
+            <li>  <b>PROBLEM</b><br/>
+                 Cache hit penalties can arise if cache reads are slow or not optimized, leading to unexpected performance degradation.
+            </li>
+            <li>  <b>WHY IT HAPPENS</b> <br/>
+                 While cache hits should be fast, poorly designed caches or heavy computation involved in cache lookups can actually slow down the system.
+            </li>
+            <li>  <b>EXAMPLE</b><br/>
+                A Redis cache lookup may involve a complicated serialization/deserialization process that adds latency, causing slow responses even for cache hits.
+            </li>
+            <li>  <b>MITIGATION</b><br/>
+                 Optimize cache lookup performance by simplifying cache access logic and ensuring minimal overhead in cache management operations.
+            </li>
+        </ul>
+    </div>
+    <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Chaosbringer.png">
+        Chaosbringer could also represent cache hit penalties, 
+        where an inefficient or resource-intensive cache lookup process leads to performance degradation even for cache hits.
+    </div>
+</div>
 
+
+<a href="#top">top</a>
+<br/>
+
+<hr class="colored text-center">
+
+<br/> 
+<br/> 
+<a name="products"></a>
+<h2 class="title">Products</h2>
+Here’s a list of popular caching solutions and example use cases for each:
+
+<h3 class="title">1. Redis <a href="https://redis.io/" target="_blank">redis.io</a></h3>
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span><br/>  -->
+         An open-source, in-memory data structure store that supports a wide range of data types such as strings, hashes, lists, sets, and sorted sets. Low-latency, in-memory storage for caching or fast access to frequently accessed data.
+    
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white"> USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span><br/> -->
+          Session storage for web applications. Redis is often used to store user session data in a way that’s fast to access and modify, which is critical for user authentication and interaction on high-traffic websites.
+     
+    </div>
+    <div class="col-4"> 
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span><br/> -->
+         An e-commerce website stores user shopping cart data in Redis to provide real-time updates and fast retrieval of the cart content.Temporary storage for session data, API response caching, or leaderboards.  Simple real-time messaging without the need for data persistence or replay.
+    </div>
+</div>
  
+   
+   
+
+
+<h3 class="title">2. Memcached <a href="https://memcached.org/" target="_blank">memcached.org</a></h3>
+ <div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+       
+          A high-performance, open-sourced, distributed memory caching system designed to speed up dynamic web applications by caching data and objects in RAM.
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+         Database query caching. Memcached is often used to cache the results of expensive database queries to reduce load on the database and provide faster responses to the client.
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+        
+         A social media platform caches frequently accessed user profile data to reduce repeated database queries for the same information.
+    </div>
+
+ </div>
+
+<h3 class="title">3. Varnish Cache <a href="https://varnish-cache.org/" target="_blank">varnish-cache.org</a></h3>
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+           A web application accelerator also known as a caching HTTP reverse proxy. Varnish caches HTTP content and accelerates the delivery of web pages.
+  
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+         Content delivery. Varnish is often used to cache and serve static assets like HTML, CSS, and images, significantly speeding up website load times.
+    
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         A news website uses Varnish to cache popular articles and serve them quickly to readers, reducing load on their web servers.
+   
+    </div>
+
+ </div>
+
+<h3 class="title">4. Amazon ElastiCache (for Redis and Memcached) <a href="https://aws.amazon.com/pm/elasticache/" target="_blank">aws.amazon.com/pm/elasticache</a></h3> 
+ 
+
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+          A fully managed, in-memory caching service by AWS that supports Redis and Memcached.
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+          Scaling caching infrastructure. With ElastiCache, you can offload the management of Redis or Memcached instances, allowing them to scale automatically with application demand.
+   
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         A video streaming platform uses Amazon ElastiCache to store user preferences and metadata, enabling fast access to personalized content for millions of users.
+    </div>
+ </div>
+
+
+<h3 class="title">5. Azure Cache for Redis <a href="https://azure.microsoft.com/en-us/products/cache" target="_blank">azure.microsoft.com/en-us/products/cache</a></h3> 
+ <div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+         A fully managed Redis cache provided by Microsoft Azure that can be used to improve application performance.
+   
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+          Caching API responses. Azure Cache for Redis can be used to cache API responses in cloud-native applications, reducing the need to call back-end services for the same data repeatedly.
+     
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+          A fintech application uses Azure Cache for Redis to cache frequently requested financial data like exchange rates and stock prices.
+    </div>
+ </div>
+
+<h3 class="title">6. Apache Kafka  <a href="https://kafka.apache.org/" target="_blank">kafka.apache.org</a></h3> 
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+        While primarily a distributed event streaming platform, Kafka’s streaming data can act as a form of real-time cache when combined with systems that consume the stream.
+   
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+         <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+        Streaming data cache. Kafka is used to provide real-time updates for systems processing high-velocity data, acting as a transient cache for fast-moving streams of information.
+  
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         A financial services company uses Kafka to provide real-time updates on stock prices to their clients, where the latest data is cached momentarily for rapid access.
+    </div>
+ </div>
+
+
+<h3 class="title">7. Ehcache <a href="https://www.ehcache.org/" target="_blank">www.ehcache.org</a></h3> 
+
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+        A widely used open-source Java-based cache that can be embedded in applications and is highly customizable.
+   
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+         Caching database results in Java applications. Ehcache is often used to speed up Hibernate-based Java applications by caching entity data.
+  
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         A large enterprise CRM application uses Ehcache to cache frequently accessed customer data to reduce the number of calls to the database.
+    </div>
+ </div>
+
+
+<h3 class="title">8. F5 Nginx Cache <a href="https://github.com/nginx/nginx" target="_blank">github.com/nginx/nginx</a></h3> 
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+        A caching mechanism built into the Nginx web server to cache HTTP responses.
+
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white"> &nbsp;USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+          Reverse proxy caching. Nginx can be used to cache HTTP requests at the edge to reduce the load on web servers and deliver faster response times to clients.
+
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         A SaaS company uses Nginx Cache to serve cached copies of frequently accessed dashboard data, reducing server load during peak times.
+    </div>
+ </div>
+
+
+<h3 class="title">9. Squid Cache <a href="https://www.squid-cache.org/" target="_blank">www.squid-cache.org</a></h3> 
+<div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+         A caching proxy for the web, supporting HTTP, HTTPS, and FTP protocols.
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white"> &nbsp;USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+          Proxy caching. Squid can be used to cache and filter web traffic, improving performance and reducing bandwidth usage for organizations.
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+          An educational institution uses Squid Cache to store copies of frequently accessed educational websites, improving load times for students while reducing internet bandwidth costs.
+    </div>
+ </div>
+
+
+
+<h3 class="title">10. Google Cloud Memorystore <a href="https://cloud.google.com/memorystore" target="_blank">cloud.google.com/memorystore</a></h3> 
+ 
+ <div class="row">
+    <div class="col-4">
+        <div class="bg-dark text-white">&nbsp;DESCRIPTION</div><br/>
+        <!-- <span class="badge text-bg-dark rounded-pill"> DESCRIPTION</span> <br/> -->
+          A fully managed Redis and Memcached service from Google Cloud.
+    </div>
+    <div class="col-4">
+        <div class="bg-success text-white">&nbsp; USE CASE</div><br/>
+        <!-- <span class="badge text-bg-success rounded-pill">&nbsp;USE CASE</span> <br/>-->
+          Reducing latency for cloud-based applications. Memorystore can be used to cache frequently accessed data like user profiles or API responses.
+    </div>
+    <div class="col-4">
+        <div class="bg-warning ">&nbsp;EXAMPLE</div><br/>
+        <!-- <span class="badge text-bg-warning rounded-pill"> &nbsp;EXAMPLE</span> <br/>-->
+         
+        A gaming platform hosted on Google Cloud uses Memorystore to cache game state data for real-time multiplayer interactions, ensuring low-latency responses during gameplay.
+    </div>
+
+ </div>
+
+
+
+
+ <a href="#top">top</a>
+
+<br/>
 
  In Summary:
 Caching can be incredibly powerful, but if mismanaged, it can lead to staleness, inconsistency, 
