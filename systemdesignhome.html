@@ -47,11 +47,6 @@
 
 
 
-
-
-
-
-
         <section>
           <div class="album py-5 bg-body-tertiary">
             <div class="container">
@@ -68,7 +63,11 @@
                       </p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <a class="btn btn-sm btn-outline-secondary" ng-href="https://www.survivingthetechnicalinterview.com{{t.image}}" target="_blank">View</a>
+                          <a class="btn btn-sm btn-outline-secondary" ng-href="https://www.survivingthetechnicalinterview.com{{t.image}}" target="_blank"> Image</a>
+                          <div ng-if="t.readmore === 'active'">
+                            <a class="btn btn-sm btn-outline-secondary" ng-href="https://www.survivingthetechnicalinterview.com/concept.html?url={{t.url}}" > Learn</a>
+                        
+                          </div>
                       </div>
   
                         <b class="display-9" style="font-family:'KomikaAxis'; margin-left:16px">{{t.alias}}</b> 
