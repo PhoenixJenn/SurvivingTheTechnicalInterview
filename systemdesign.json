@@ -34,7 +34,7 @@
         "image": "/images/infographics/ProtocolsAndAPIsGraphic.png",
         "thumbnail": "/images/infographics/ProtocolsAndAPIsGraphic.png",
         "shortdesc": "Get a comprehensive overview of the essential APIs and internet protocols for system design. With these insights, you’ll be ready to choose the right communication methods for your application.",
-        "readmore":"inactive"
+        "readmore":"active"
     },
     {
         "alias": "Choosing a Database",
@@ -61,7 +61,7 @@
         "image": "/images/infographics/LoadBalancing_Infographic.png",
         "thumbnail": "/images/infographics/LoadBalancing_Infographic.png",
         "shortdesc": "Load Balancing is A key factor in scaling systems efficiently, improving performance, and ensuring fault tolerance. Whether it’s handling millions of concurrent connections with Network Load Balancers (NLBs) or managing application traffic with Application Load Balancers (ALBs), each approach has unique strengths that fit different scenarios.",
-        "readmore":"inactive"
+        "readmore":"active"
     },
     {
         "alias": "Caching",

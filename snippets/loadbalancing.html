@@ -1,5 +1,5 @@
-<div class="row"></div>
-    <div class="col-6 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Stabillon.png">
+<!-- <div class="row"> 
+    <div class="col-6 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Stabilon.png">
         <b class="display-6 text-center " style="font-family:'KomikaAxis'; margin-left:16px">Stabillon</b>
     </div>
     <div class="col-6"> <h2 class="title">Load Balancing </h2>
@@ -14,6 +14,218 @@
     </ul>
     </div>
     
+</div> -->
+
+
+<style>
+
+    li, li.spaced {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="bs-callout bs-callout-warning"> 
+    <h4 id="note">This is a note</h4>
+    <p>Example code: <code class="highlighter-rouge">&lt;div&gt;</code> for reference.</p>
 </div>
+
+<a name="top"></a>
+
+<div class="row">
+    <div class="col-6 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Stabilon.png">
+        <b class="display-6 text-center " style="font-family:'KomikaAxis'; margin-left:16px">Stabillon</b></div>
+    <div class="col-6"> <h2 class="title">What is Load Balancing?</h2>
+      <p> 
+        Load balancing is the process of <b>distributing incoming network or application traffic</b> 
+        across multiple servers to ensure that no single server becomes overwhelmed. 
+        It helps to optimize resource use, maximize throughput, minimize response time, and ensure system reliability.
+
+    </p> 
+    <p>In this section, we'll cover:</p>
+    <ul>
+        <li><a href="#benefits">Benefits of Load Balancing</a></li>
+        <li><a href="#types">Types of Load Balancers</a></li>
+        <li><a href="#algorithms">Load Balancing Algorithms</a></li>
+        <li><a href="#challenges">Common Challenges (with villains!)</a></li>
+        <li><a href="#stabillon">How Stabillon Saves the Day</li>
+
+    </ul>
+    </div>
+    
+</div>
+
+
 <br/>
 <hr class="colored text-center">
+<a name="benefits"></a>
+<br/>
+<h2 class="title">Benefits of Load Balancing</h2>
+
+<ul>
+    <li>
+         <b>Improved Availability and Reliability</b>  <br/>
+        Load balancers ensure <b>high availability</b> by routing traffic to healthy servers. 
+        If a server goes down, the load balancer redirects traffic to the other servers, preventing downtime.
+     </li>
+    <li>
+        <b>Increased Scalability</b> <br/>
+        By distributing traffic across multiple servers, load balancers allow you to <b>scale horizontally</b>. 
+        As demand grows, you can add more servers, and the load balancer will spread the load, ensuring smooth performance.
+     
+    </li>
+    <li>
+        <b>Optimized Resource Utilization </b> <br/>
+        Load balancing helps in optimizing the utilization of servers. 
+        It ensures that each server is used efficiently without being overloaded, which helps in <b>reducing costs</b>
+        and <b>improving system performance</b>.
+     
+    </li>
+    <li>
+        <b>Reduced Latency</b> <br/>
+    Load balancers can distribute traffic based on server location, which means users get served by the nearest server, 
+    resulting in <b>lower latency</b> and <b>faster response times</b>.
+
+    </li>
+</ul>
+
+<br/>
+<hr class="colored text-center">
+
+<br/>
+<h2 class="title">Types of Load Balancers</h2>
+<div class="row"> 
+    <div class="col-4">
+        <b> Network Load Balancers (NLB) </b><br/>     
+        <ul>
+            <li> Operate at the <b>transport layer (Layer 4)</b></li>
+            <li> Best for handling large volumes of TCP/UDP traffic, with a focus on <b>speed and simplicity</b></li>
+            <li> Use Case: Ideal for applications that require <b>ultra-fast throughput</b> without much need for advanced routing decisions.</li>
+        </ul> 
+    </div>
+    <div class="col-4"> 
+        <b> Application Load Balancers (ALB) </b><br/>
+       
+        <ul>
+            <li> Operate at the <b>application layer (Layer 7)</b></li>
+            <li> Allow for <b>intelligent routing</b> based on HTTP headers, path, and more, providing granular control over traffic.</li>
+            <li> Use Case: Ideal for <b>web applications</b>, API gateways, and services that need advanced request processing capabilities.</li>
+        </ul> 
+    </div>
+    <div class="col-4">
+        <b> API Gateway </b><br/>
+        <b> </b>  
+        <ul>
+            <li> </li>
+            <li> </li>
+            <li> </li>
+        </ul> 
+    </div>
+   
+</div>
+<a href="#top">top</a>
+<br/>
+
+<a name="algorithms"></a>
+<br/>
+<hr class="colored text-center">
+<br/>
+
+<h2 class="title">Load Balancing Algorithms</h2>
+Load balancers use different algorithms to determine how to distribute incoming traffic:
+<div class="row"> 
+    <div class="col-4">
+        <b> Round Robin </b><br/>
+        Traffic is distributed in a circular order across all available servers. 
+        Simple but effective when servers have similar capabilities.
+    </div>
+    <div class="col-4">
+        <b> Least Connections </b><br/>
+        Traffic is directed to the server with the fewest active connections, optimizing for current resource use.
+    </div>
+    <div class="col-4">
+        <b> Weighted Round Robin </b><br/>
+        Servers are assigned weights based on their processing capacity, and traffic is distributed accordingly.
+        <br/>&nbsp;<br/>
+    </div>
+    <div class="col-4">
+        <b> IP Hash </b><br/>
+        The IP address of the client is hashed, and traffic is consistently routed to the same server, useful for <b>session persistence</b>.
+    </div>
+</div>
+<a href="#top">top</a>
+<br/>
+
+
+
+<br/><a name="challenges"></a>
+<hr class="colored text-center">
+
+<br/>
+<h2 class="title">Common Challenges (Villains!)</h2>
+Load balancing, while beneficial, is not without its challenges. Here are some common issues—illustrated with our villains:
+
+<div class="row"> 
+    <h3 class="title">Configuration Complexity </h3>
+    <div class="row">
+        <div class="col-8">
+            Managing and configuring load balancers can be complicated, especially when multiple services 
+            or regions are involved.  
+        </div>
+        <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Sprawl.png">
+            <b>Captain Sprawl</b> represents the complexity that leads to misconfigured load balancers, 
+        resulting in traffic mismanagement.
+        </div>
+    </div>
+
+
+    <h3 class="title">Latency Issues</h3>
+    <div class="row">
+        <div class="col-8">
+            Improper load balancing algorithms or configuration can introduce <b>latency</b>, 
+            slowing down response times. 
+        </div>
+        <div class="col-4 card"><img class="rounded-circle " src="https://survivingthetechnicalinterview.com/images/Heroes/Lagdrain.png">
+           <b>Lagdrain</b>  loves to create inefficiencies in routing, adding unnecessary delay to data delivery.
+        </div>
+    </div>
+
+</div>
+<a href="#top">top</a>
+
+ 
+
+
+<a name="stabillon"></a>
+   <br/>
+   <hr class="colored text-center">
+   
+   <br/>
+   <h2 class="title">How Stabillon Saves the Day</h2>
+   <b>Stabillon</b> is our <b>load balancing superhero</b>, 
+   handling the complexity of distributing incoming traffic to ensure every server is used effectively:
+
+<ul>
+    <li> <b>Balancing the Load</b><br/> Stabillon distributes requests evenly across available servers, 
+        preventing any one server from being overwhelmed.
+    </li>
+    <li>  <b>Monitoring Health</b> : <br/>
+         Continuously checks the health of servers, ensuring that traffic is only routed to healthy nodes. 
+         If a server fails, Stabillon reroutes traffic to prevent downtime.
+
+       
+    </li>
+    <li> <b>Intelligent Routing</b>
+        <br/> Uses advanced algorithms to decide the best server for each request, reducing latency and optimizing user experience.
+ 
+    </li>
+
+</ul>
+
+Stabillon’s efforts ensure that systems stay <b>resilient</b>, <b>efficient</b>, and <b>high-performing</b>, even under heavy load.
+
+<br/>
+
+   
+   <a href="#top">top</a>
+
+

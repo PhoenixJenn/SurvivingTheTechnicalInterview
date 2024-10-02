@@ -140,7 +140,57 @@ main {
       font-family:  sans-serif;
   }
   
+  .bd-callout-info {
+    border-left-color: #5bc0de;
+}
 
+
+
+
+/* Base styles (regardless of theme) */
+.bs-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+ 
+  .bs-callout h4 {
+    margin-top: 0;
+  }
+  .bs-callout p:last-child {
+    margin-bottom: 0;
+  }
+  .bs-callout code,
+  .bs-callout .highlight {
+    background-color: #fff;
+  }
+  
+  /* Themes for different contexts */
+  .bs-callout-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    }
+  .bs-callout-danger {
+    background-color: #fcf2f2;
+    border-color: #dFb5b4;
+  }
+  
+  .bs-callout-warning {
+    
+    background-color: #fefbed;
+    border-color: #f1e7bc;
+    border-left-color: #f0ad4e;
+}
+  .bs-callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+  }
     
     .row-title-no-wrap[data-v-32768]{white-space:nowrap}
     @keyframes sideLinesAnim-2707b0c1{0%{background-position:0 0}to{background-position:0 -75px}}
